@@ -23,6 +23,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::wcout << iter->letter << " " << iter->name << " " << iter->type << " " << iter->file_system << std::endl;
 	}
 	delete p_my_os_info;
+
+
 	return 0;
 }
 
