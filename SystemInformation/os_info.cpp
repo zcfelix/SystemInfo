@@ -76,9 +76,12 @@ int GetDriveInfo(OsInfo *p_os_info)
 			drive_info.name = drive_name;
 			drive_info.file_system = drive_fs;
 			drive_info.type = GetFriendlyDriveType(drive_path);
-			GetDiskFreeSpaceEx(drive_path, (PULARGE_INTEGER)& drive_info.free_available_bytes,
-				(PULARGE_INTEGER)& drive_info.total_bytes, (PULARGE_INTEGER)& drive_info.free_bytes);
+			// GetDiskdFreeSpaceEx()函数正确返回时其值不为0，此函数有可能不正确返回，例如CD-ROM没有
+			// 就绪的情况，因此在循环末尾对drive_info结构体进行了清零操作。
+			GetDiskFreeSpaceEx(drive_path, &drive_info.free_available_bytes,
+				&drive_info.total_bytes, &drive_info.free_bytes);
 			p_os_info->drive_info_list.push_back(drive_info);
+			memset(&drive_info, 0, sizeof(DriveInfo));
 		}
 	}
 	return 0;
