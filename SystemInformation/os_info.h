@@ -9,6 +9,9 @@ typedef struct __DriveInfo
 	std::wstring name;
 	std::wstring type;
 	std::wstring file_system;
+	ULARGE_INTEGER total_bytes;
+	ULARGE_INTEGER free_bytes;
+	ULARGE_INTEGER free_available_bytes;
 }DriveInfo;
 
 typedef struct __OsInfo
@@ -24,5 +27,6 @@ typedef struct __OsInfo
 std::wstring GetWindowsVersion();
 int GetOsInfo(OsInfo *p_os_info);
 int GetDriveInfo(OsInfo *p_os_info);
+std::wstring GetFriendlyDriveType(TCHAR drive_path[]);
 
 #endif 

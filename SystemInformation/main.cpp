@@ -21,6 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (auto iter = p_my_os_info->drive_info_list.begin(); iter != p_my_os_info->drive_info_list.end(); ++iter)
 	{
 		std::wcout << iter->letter << " " << iter->name << " " << iter->type << " " << iter->file_system << std::endl;
+		std::wcout << iter->total_bytes.QuadPart / 1024.0 / 1024.0 / 1024.0 << " " << iter->free_bytes.QuadPart / 1024.0 / 1024.0 / 1024.0 << " " << iter->free_available_bytes.QuadPart / 1024.0 / 1024.0 / 1024.0 << std::endl;
 	}
 	delete p_my_os_info;
 

@@ -64,50 +64,55 @@ std::wstring GetWindowsVersion()
 int GetDriveInfo(OsInfo *p_os_info)
 {
 	DriveInfo drive_info;
-	PULARGE_INTEGER total_bytes, free_bytes, free_available_bytes;
-
 	DWORD drives = GetLogicalDrives();
 	for (int i = 0; i < 26; i++)
 	{
 		if ( drives & (1 << i) )
 		{
 			drive_info.letter = L'A' + i;
-
 			TCHAR drive_path[] = { L'A' + i, L':', L'\\', L'\0' };
 			TCHAR drive_fs[10], drive_name[MAX_PATH];
 			GetVolumeInformation(drive_path, drive_name, MAX_PATH + 1, NULL, NULL, NULL, drive_fs, MAX_PATH + 1);
 			drive_info.name = drive_name;
 			drive_info.file_system = drive_fs;
-
-			UINT type = GetDriveType(drive_path);
-			switch (type)
-			{
-			case DRIVE_UNKNOWN:
-				drive_info.type = L"Unknown";
-				break;
-			case DRIVE_NO_ROOT_DIR:
-				drive_info.type = L"No this root dir";
-				break;
-			case DRIVE_REMOVABLE:
-				drive_info.type = L"Removable drive";
-				break;
-			case DRIVE_FIXED:
-				drive_info.type = L"Fixed drive";
-				break;
-			case DRIVE_REMOTE:
-				drive_info.type = L"Remote drive";
-				break;
-			case DRIVE_CDROM:
-				drive_info.type = L"CD-ROM";
-				break;
-			case DRIVE_RAMDISK:
-				drive_info.type = L"RAM";
-				break;
-			default:
-				drive_info.type = L"Error";
-			}
+			drive_info.type = GetFriendlyDriveType(drive_path);
+			GetDiskFreeSpaceEx(drive_path, (PULARGE_INTEGER)& drive_info.free_available_bytes,
+				(PULARGE_INTEGER)& drive_info.total_bytes, (PULARGE_INTEGER)& drive_info.free_bytes);
 			p_os_info->drive_info_list.push_back(drive_info);
 		}
 	}
 	return 0;
+}
+
+std::wstring GetFriendlyDriveType(TCHAR drive_path[])
+{
+	std::wstring friendly_drive_type;
+	UINT type = GetDriveType(drive_path);
+	switch (type)
+	{
+	case DRIVE_UNKNOWN:
+		friendly_drive_type = L"Unknown";
+		break;
+	case DRIVE_NO_ROOT_DIR:
+		friendly_drive_type = L"No this root dir";
+		break;
+	case DRIVE_REMOVABLE:
+		friendly_drive_type = L"Removable drive";
+		break;
+	case DRIVE_FIXED:
+		friendly_drive_type = L"Fixed drive";
+		break;
+	case DRIVE_REMOTE:
+		friendly_drive_type = L"Remote drive";
+		break;
+	case DRIVE_CDROM:
+		friendly_drive_type = L"CD/DVD-ROM";
+		break;
+	case DRIVE_RAMDISK:
+		friendly_drive_type = L"RAM";
+		break;
+	default:
+		friendly_drive_type = L"Error";
+	}
+	return friendly_drive_type;
 }
