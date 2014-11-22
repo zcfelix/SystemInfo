@@ -79,12 +79,14 @@
     <Text Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="network_software.h" />
     <ClInclude Include="os_info.h" />
     <ClInclude Include="software_info.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="network_software.cpp" />
     <ClCompile Include="os_info.cpp" />
     <ClCompile Include="software_info.cpp" />
     <ClCompile Include="stdafx.cpp">
