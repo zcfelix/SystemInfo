@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "software_info.h"
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 LPCTSTR const software_key_path = _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
 int GetInstalledSoftwareInfo(std::vector<SoftwareInfo> *p_s_info_list)
@@ -83,7 +85,15 @@ int QuerySoftwareInfoValue(SoftwareInfo *p_s_info, HKEY *h_item)
 	p_s_info->install_location = buffer;
 
 	RegQueryValueEx(*h_item, _T("EstimatedSize"), NULL, &reg_type, (LPBYTE)&estimated_size, &size_len);
-	double software_size = estimated_size / 1024.0;
-	p_s_info->size = software_size;
+	if (estimated_size == 0)
+	{
+		p_s_info->size = _T("");
+	}
+	else
+	{
+		std::wstringstream ss;
+		ss << std::fixed << std::setprecision(1) << estimated_size / 1024.0 << "MB";
+		p_s_info->size = ss.str();
+	}
 	return 0;
 }

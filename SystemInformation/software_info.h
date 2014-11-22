@@ -10,7 +10,7 @@ typedef struct __SoftwareInfo
 	std::wstring install_date;
 	std::wstring publisher;
 	std::wstring install_location;
-	double size;
+	std::wstring size;
 }SoftwareInfo;
 
 int GetInstalledSoftwareInfo(std::vector<SoftwareInfo> *p_s_info_list);

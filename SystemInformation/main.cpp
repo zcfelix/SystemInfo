@@ -36,7 +36,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		if (iter->name[0] != '\0')
 		{
-			fwprintf(out_file, _T("%s\n"), iter->name.c_str());
+			const TCHAR *format = _T("name: %s\nversion: %s\npublisher: %s\nsize: %s\ninstall date: %s\ninstall location: %\s\n\n\n");
+			fwprintf(out_file, format, iter->name.c_str(), iter->version.c_str(), iter->publisher.c_str(), 
+				iter->size.c_str(), iter->install_date.c_str(), iter->install_location.c_str());
 		}
 	}
 	return 0;
