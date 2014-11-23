@@ -12,6 +12,7 @@ typedef struct __DriveInfo
 	ULARGE_INTEGER total_bytes;
 	ULARGE_INTEGER free_bytes;
 	ULARGE_INTEGER free_available_bytes;
+	std::wstring encrypted_status;
 }DriveInfo;
 
 typedef struct __OsInfo
@@ -28,5 +29,5 @@ std::wstring GetWindowsVersion();
 int GetOsInfo(OsInfo *p_os_info);
 int GetDriveInfo(OsInfo *p_os_info);
 std::wstring GetFriendlyDriveType(TCHAR drive_path[]);
-
+std::wstring GetVolumeEncryptedStatus(TCHAR drive_letter);
 #endif 

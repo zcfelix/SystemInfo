@@ -69,8 +69,8 @@ int GetDriveInfo(OsInfo *p_os_info)
 	{
 		if ( drives & (1 << i) )
 		{
-			drive_info.letter = L'A' + i;
-			TCHAR drive_path[] = { L'A' + i, L':', L'\\', L'\0' };
+			drive_info.letter = _T('A' + i);
+			TCHAR drive_path[] = { _T('A' + i), _T(':'), _T('\\'), _T('\0') };
 			TCHAR drive_fs[10], drive_name[MAX_PATH];
 			GetVolumeInformation(drive_path, drive_name, MAX_PATH + 1, NULL, NULL, NULL, drive_fs, MAX_PATH + 1);
 			drive_info.name = drive_name;
@@ -80,6 +80,7 @@ int GetDriveInfo(OsInfo *p_os_info)
 			// 就绪的情况，因此在循环末尾对drive_info结构体进行了清零操作。
 			GetDiskFreeSpaceEx(drive_path, &drive_info.free_available_bytes,
 				&drive_info.total_bytes, &drive_info.free_bytes);
+			// drive_info.encrypted_status = GetVolumeEncryptedStatus(drive_info.letter);
 			p_os_info->drive_info_list.push_back(drive_info);
 			memset(&drive_info, 0, sizeof(DriveInfo));
 		}
@@ -119,3 +120,8 @@ std::wstring GetFriendlyDriveType(TCHAR drive_path[])
 	}
 	return friendly_drive_type;
 }
+
+//std::wstring GetVolumeEncryptedStatus(TCHAR drive_letter)
+//{
+//	PCWSTR drive = _T("")
+//}
