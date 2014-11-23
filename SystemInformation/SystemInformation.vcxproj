@@ -79,6 +79,7 @@
     <Text Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="mail_client.h" />
     <ClInclude Include="network_software.h" />
     <ClInclude Include="os_info.h" />
     <ClInclude Include="software_info.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="mail_client.cpp" />
     <ClCompile Include="network_software.cpp" />
     <ClCompile Include="os_info.cpp" />
     <ClCompile Include="software_info.cpp" />
