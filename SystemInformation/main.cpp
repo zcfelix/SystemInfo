@@ -66,35 +66,3 @@ static int SaveSoftwareInfo(std::vector<SoftwareInfo> *p_s_info, SoftwareType st
 	}
 	return ret_val;
 }
-
-//static int SaveSoftwareInfo(std::vector<SoftwareInfo> *p_s_info_list, SoftwareType st)
-//{
-//	std::locale::global(std::locale(""));
-//	std::wofstream fout;
-//	std::wstring file_name;
-//	switch (st)
-//	{
-//	case ALL_SOFTWARE:
-//		file_name = _T("_installed_software_list.txt");
-//		break;
-//	case MAIL_CLIENT:
-//		file_name = _T("_mail_client_list.txt");
-//		break;
-//	case NETWORK_DISK:
-//		file_name = _T("_network_disk_list.txt");
-//		break;
-//	default:
-//		break;
-//	}
-//	fout.open(file_name.c_str(), std::wofstream::out);
-//	
-//	for (auto iter = p_s_info_list->begin(); iter != p_s_info_list->end(); ++iter)
-//	{
-//		if (!(iter->name).empty())
-//		{
-//			fout << _T("name: ") << iter->name << std::endl;
-//		}
-//	}
-//	fout.close();
-//	return 0;
-//}

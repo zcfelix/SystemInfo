@@ -9,8 +9,6 @@ typedef enum __SoftwareType
 	ALL_SOFTWARE
 }SoftwareType;
 
-//int CreateNetworkDiskList(std::vector<SoftwareInfo> *p_nd_list);
-//bool IsNetworkDisk(SoftwareInfo *p_s_info);
 int  GetSpecificSoftwareList(std::vector<SoftwareInfo> *p_ss_list, SoftwareType st);
 bool IsSpecificSoftware(SoftwareInfo *p_s_info, SoftwareType st);
 int GetKeywords(SoftwareType ss, std::vector<std::wstring> *keywords);

@@ -121,7 +121,3 @@ std::wstring GetFriendlyDriveType(TCHAR drive_path[])
 	return friendly_drive_type;
 }
 
-//std::wstring GetVolumeEncryptedStatus(TCHAR drive_letter)
-//{
-//	PCWSTR drive = _T("")
-//}
